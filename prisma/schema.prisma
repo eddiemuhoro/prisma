@@ -1,6 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider ="prisma-client-js"
 }
@@ -16,27 +15,32 @@ model User {
   email     String   @unique
   name      String?// ? means optional
   isAdmin   Boolean  @default(false)
-  writtenPosts Post[] @relation("writtenBy")
-  favoritedPosts Post[] @relation("favoritedBy")
+  postedJobs Job[] @relation("postedBy")
+  favoritedJobs Job[] @relation("favoritedBy")
 }
  
-model Post {
+model Job {
   id        String      @default(uuid()) @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title     String
-  content   String?
-  published Boolean  @default(false)
-  author User @relation("writtenBy",fields: [authorId], references: [id])
-  authorId String
+  description   String?
+  employer User @relation("postedBy",fields: [employerId], references: [id])
+  employerId String
   favoritedBy User? @relation("favoritedBy", fields: [favoritedById], references: [id])
   favoritedById String? 
-  categories Category[]
 }
 
-model Category {
+model employee{
   id        String      @default(uuid()) @id
   createdAt DateTime @default(now())
-  posts     Post[]
+  updatedAt DateTime @updatedAt
+  name     String
+  email   String @unique
+  password String
+  profilePic String @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
+  phone String?
+
 }
+
 
