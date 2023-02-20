@@ -9,27 +9,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String      @default(uuid()) @id
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?// ? means optional
-  isAdmin   Boolean  @default(false)
-  postedJobs Job[] @relation("postedBy")
-  favoritedJobs Job[] @relation("favoritedBy")
-}
- 
-model Job {
-  id        String      @default(uuid()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  description   String?
-  employer User @relation("postedBy",fields: [employerId], references: [id])
-  employerId String
-  favoritedBy User? @relation("favoritedBy", fields: [favoritedById], references: [id])
-  favoritedById String? 
-}
 
 model employee{
   id        String      @default(uuid()) @id
@@ -40,7 +19,39 @@ model employee{
   password String
   profilePic String @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
   phone String?
+  jobs job[] @relation("employee")
 
 }
+
+
+model employer{
+  id        String      @default(uuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name     String
+  secondName String?
+  email   String @unique
+  password String
+  profilePic String @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
+  phone String?
+  jobs job[] @relation("employer")
+
+}
+
+model job{
+  id        String      @default(uuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  description   String?
+  //an array of skills
+  skills String[]
+  employer employer @relation("employer",fields: [employerId], references: [id])
+  employerId String
+  employee employee? @relation("employee",fields: [employeeId], references: [id])
+  employeeId String?
+}
+
+
 
 
