@@ -1,9 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import router from './routes/users';
 import cors from 'cors';
 import routerJob from './routes/job';
 import routerEmployee from './auth/employee';
+import routerEmployer from './auth/employer';
+
 dotenv.config();
 
 const app = express();
@@ -29,10 +30,10 @@ app.use(express.urlencoded({ extended: true }));
 
 const port =  8000;
 
-app.use('/users', router);
+
 app.use('/job', routerJob);
 app.use('/employee', routerEmployee);
-
+app.use('/employer', routerEmployer);
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`);
 })
