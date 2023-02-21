@@ -1,7 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator client {
-  provider ="prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -9,49 +9,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model employee{
-  id        String      @default(uuid()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name     String
-  email   String @unique
-  password String
-  profilePic String @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
-  phone String?
-  jobs job[] @relation("employee")
-
+model employee {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  name       String
+  email      String   @unique
+  password   String
+  profilePic String   @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
+  phone      String?
 }
 
-
-model employer{
-  id        String      @default(uuid()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name     String
+model employer {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  name       String
   secondName String?
-  email   String @unique
-  password String
-  profilePic String @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
-  phone String?
-  jobs job[] @relation("employer")
-
+  email      String   @unique
+  password   String
+  profilePic String   @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
+  phone      String?
+  job job[]
 }
 
-model job{
-  id        String      @default(uuid()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  description   String?
-  //an array of skills
-  skills String[]
-  employer employer @relation("employer",fields: [employerId], references: [id])
-  employerId String
-  employee employee? @relation("employee",fields: [employeeId], references: [id])
-  employeeId String?
+model job {
+  id                String   @id @default(uuid())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  title             String
+  description       String?
+  skills            String[]
+  employerId        String
+  belongsToEmployer employer @relation(fields: [employerId], references: [id])
 }
-
-
-
-
