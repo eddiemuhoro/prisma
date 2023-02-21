@@ -40,4 +40,22 @@ router.post('/login', async (req, res)=>{
 }
 )
 
+//get all employers
+router.get('/', async (req, res)=>{
+    const employers = await prisma.employer.findMany();
+    res.json(employers);
+}
+)
+
+//get jobs posted by an employer
+router.get('/:id/jobs', async (req, res)=>{
+    const jobs = await prisma.job.findMany({
+        where: {
+            employerId: String(req.params.id)
+        }
+    })
+    res.json(jobs);
+}
+)
+
 export default router;
