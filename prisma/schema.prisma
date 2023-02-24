@@ -18,6 +18,8 @@ model employee {
   password   String
   profilePic String   @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
   phone      String?
+  bid bid[]
+ 
 }
 
 model employer {
@@ -41,5 +43,21 @@ model job {
   description       String?
   skills            String[]
   employerId        String
-  belongsToEmployer employer @relation(fields: [employerId], references: [id])
+  belongsToEmployer employer @relation(fields: [employerId], references: [id] )
+  bid bid[]
+
 }
+
+model bid {
+  id                String      @id @default(uuid())
+  description       String
+  name              String
+  belongToEmployee  String
+  job               String
+  isSelected     Boolean  @default(false)
+  belongsToEmployee employee @relation(fields: [belongToEmployee], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  belongToJob       String    
+  belongsToJob      job      @relation(fields: [belongToJob], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  // @@id([belongToEmployee, belongToJob])
+}
+

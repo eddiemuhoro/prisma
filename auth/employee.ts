@@ -39,4 +39,11 @@ router.post('/login', async (req, res)=>{
 }
 )
 
+//get all employees
+router.get('/', async (req, res)=>{
+    const employees = await prisma.employee.findMany();
+    res.json(employees);
+}
+)
+
 export default router;

@@ -8,7 +8,7 @@ router.post('/', async (req, res)=>{
     const { title, description, employerId, skills } = req.body;
     const job = await prisma.job.create({
         data: {
-          title: "title",
+          title: "Kenya",
           description: "description",
           employerId: 'fb28124d-b779-4f23-b587-c3318f335a30',
           skills: ['HTML', 'CSS', 'JS']
@@ -26,10 +26,21 @@ router.get('/', async (req, res)=>{
 )
 
 //het a job by id
+router.get('/employer/:id', async (req, res)=>{
+    const job = await prisma.job.findMany({
+        where: {
+            //id is a string
+            employerId: String(req.params.id)
+        }
+    })
+    res.json(job);
+}
+)
+
+//get a single job from employer using job id
 router.get('/:id', async (req, res)=>{
     const job = await prisma.job.findUnique({
         where: {
-            //id is a string
             id: String(req.params.id)
         }
     })

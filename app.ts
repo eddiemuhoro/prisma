@@ -4,6 +4,7 @@ import cors from 'cors';
 import routerJob from './routes/job';
 import routerEmployee from './auth/employee';
 import routerEmployer from './auth/employer';
+import routerBid from './routes/Application';
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ const port =  8000;
 app.use('/job', routerJob);
 app.use('/employee', routerEmployee);
 app.use('/employer', routerEmployer);
+app.use('/bid', routerBid);
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`);
 })
