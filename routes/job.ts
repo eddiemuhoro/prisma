@@ -8,7 +8,7 @@ router.post('/', async (req, res)=>{
     const { title, description, employerId, skills } = req.body;
     const job = await prisma.job.create({
         data: {
-          title: "Kenya",
+          title: "Kotlin Developer",
           description: "description",
           employerId: 'fb28124d-b779-4f23-b587-c3318f335a30',
           skills: ['HTML', 'CSS', 'JS']
@@ -47,6 +47,23 @@ router.get('/:id', async (req, res)=>{
     res.json(job);
 }
 )
+
+
+//update favorite job
+router.put('/favorite/:id', async (req, res)=>{
+    const job = await prisma.job.update({
+        where: {
+            id: String(req.params.id)
+        },
+        //update favorite to true from frontend
+        data: {
+            isFavorite: true
+        }
+    })
+    res.json(job);
+}
+)
+
 
 // router.delete('/:id', async (req, res)=>{
  
