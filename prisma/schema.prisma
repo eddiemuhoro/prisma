@@ -18,8 +18,7 @@ model employee {
   password   String
   profilePic String   @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
   phone      String?
-  bid bid[]
- 
+  bid bid[] 
 }
 
 model employer {
@@ -44,9 +43,11 @@ model job {
   skills            String[]
   employerId        String
   belongsToEmployer employer @relation(fields: [employerId], references: [id] )
+  //employee can add job to favorite
+  isFavorite     Boolean  @default(false)
   bid bid[]
-
 }
+
 
 model bid {
   id                String      @id @default(uuid())
