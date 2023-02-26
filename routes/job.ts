@@ -8,10 +8,10 @@ router.post('/', async (req, res)=>{
     const { title, description, employerId, skills } = req.body;
     const job = await prisma.job.create({
         data: {
-          title: "Kotlin Developer",
-          description: "description",
-          employerId: 'fb28124d-b779-4f23-b587-c3318f335a30',
-          skills: ['HTML', 'CSS', 'JS']
+          title: title,
+          description: description,
+          employerId: employerId,
+          skills: skills
         },
     })
     res.json(job);
