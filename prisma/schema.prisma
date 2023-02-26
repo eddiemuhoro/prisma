@@ -16,7 +16,7 @@ model employee {
   name       String
   email      String   @unique
   password   String
-  profilePic String   @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
+  profilePic String   @default("https://www.w3schools.com/howto/img_avatar.png")
   phone      String?
   bid bid[] 
 }
@@ -29,7 +29,7 @@ model employer {
   secondName String?
   email      String   @unique
   password   String
-  profilePic String   @default("https://firebasestorage.googleapis.com/v0/b/apt-rite-346310.appspot.com/o/profile.jpg?alt=media&token=71a31f30-11ee-49b9-913c-b3682d3f6ea7")
+  profilePic String   @default("https://www.w3schools.com/howto/img_avatar.png")
   phone      String?
   job job[]
 }
