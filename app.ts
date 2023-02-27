@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const port =   8000;
+const port = 8000 || process.env.PORT;
 
 
 app.use('/job', routerJob);
