@@ -18,6 +18,7 @@ model employee {
   password   String
   profilePic String   @default("https://www.w3schools.com/howto/img_avatar.png")
   phone      String?
+  job job[]
   bid bid[] 
 }
 
@@ -42,6 +43,8 @@ model job {
   description       String?
   skills            String[]
   employerId        String
+  favoritedBy       String?
+  fav       employee? @relation(fields: [favoritedBy], references: [id])
   belongsToEmployer employer @relation(fields: [employerId], references: [id] )
   //employee can add job to favorite
   isFavorite     Boolean  @default(false)
@@ -59,6 +62,18 @@ model bid {
   belongsToEmployee employee @relation(fields: [belongToEmployee], references: [id], onDelete: Cascade, onUpdate: Cascade)
   belongToJob       String    
   belongsToJob      job      @relation(fields: [belongToJob], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  message message[]
   // @@id([belongToEmployee, belongToJob])
+}
+
+model message {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  message    String
+  sender     String
+  receiver   String
+  bid        String
+  belongToBid bid @relation(fields: [bid], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
