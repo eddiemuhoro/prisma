@@ -36,5 +36,16 @@ router.get('/job/:id', async (req, res)=>{
     res.json(bid);
 }
 )
+//get bid of an employee
+router.get('/:id', async (req, res)=>{
+    const bid = await prisma.bid.findMany({
+        where: {
+            //id is a string
+            belongToEmployee: String(req.params.id)
+        }
+    })
+    res.json(bid);
+}
+)
 
 export default router;
