@@ -5,6 +5,7 @@ import routerJob from './routes/job';
 import routerEmployee from './auth/employee';
 import routerEmployer from './auth/employer';
 import routerBid from './routes/Application';
+import routerMessage from './routes/message';
 
 dotenv.config();
 
@@ -29,13 +30,14 @@ app.use(function(req, res, next) {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const port =  8000 || process.env.PORT;
+const port =   8000;
 
 
 app.use('/job', routerJob);
 app.use('/employee', routerEmployee);
 app.use('/employer', routerEmployer);
 app.use('/bid', routerBid);
+app.use('/message', routerMessage);
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`);
 })
