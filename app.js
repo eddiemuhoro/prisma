@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const port = 8000 || process.env.PORT;
+const port =  process.env.PGPORT;
 
 
 app.use('/job', routerJob);
