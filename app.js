@@ -1,3 +1,11 @@
+// const express = require('express');
+// const dotenv = require('dotenv');
+// const cors = require('cors');
+// const routerJob = require('./routes/job');
+// const routerEmployee = require('./auth/employee');
+// const routerEmployer = require('./auth/employer');
+// const routerBid = require('./routes/Application');
+// const routerMessage = require('./routes/message');
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
