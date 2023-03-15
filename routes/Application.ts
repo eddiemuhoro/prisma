@@ -1,5 +1,5 @@
 import express from 'express';
-import prisma from '../script.js';
+import prisma from '../script';
 const router = express.Router();
 
 router.post('/', async (req, res)=>{

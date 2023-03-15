@@ -9,11 +9,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import routerJob from './routes/job.js';
-import routerEmployee from './auth/employee.js';
-import routerEmployer from './auth/employer.js';
-import routerBid from './routes/Application.js';
-import routerMessage from './routes/message.js';
+import routerJob from './routes/job';
+import routerEmployee from './auth/employee';
+import routerEmployer from './auth/employer';
+import routerBid from './routes/Application';
+import routerMessage from './routes/message';
 
 dotenv.config();
 
